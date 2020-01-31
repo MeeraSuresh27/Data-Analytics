@@ -1,77 +1,168 @@
-Q1. List 20 results where taxis covered 250 miles or more.
+Q1. List 10 crimes committed on Chicago Streets. (From chicago_crime dataset)
 
-Commands:
-SELECT trip_miles
-FROM `bigquery-public-data.chicago_taxi_trips.taxi_trips` 
-WHERE trip_miles>=250
-limit 20
+Command:
+SELECT * FROM `bigquery-public-data.chicago_crime.crime` 
+where location_description="STREET"
+Limit 10
 
-Results:
-trip_miles
-278.0
-255.5
-321.5
-962.2
-493.8
-463.6
-502.3
-264.0
-372.3
-945.2
-690.2
-370.2
-572.3
-495.8
-400.2
-260.8
-334.8
-282.7
-551.0
-750.6
+Result:
+unique_key	case_number	date	                  block	                iucr	primary_type	        description	location_description	    arrest	domestic	beat	district	ward	community_area	fbi_code	x_coordinate	y_coordinate	year	updated_on	latitude	longitude	location
+10017779	  HY207181	  2015-04-02 02:26:00 UTC	055XX N MARMORA AVE	  0930	MOTOR VEHICLE THEFT	  THEFT/RECOVERY: AUTOMOBILE	STREET	  false	false	1622	16	45	11	07	1135881.0	1936279.0	2015	2018-02-10 15:50:01 UTC	41.981326756	-87.775646337	"(41.981326756, -87.775646337)"
+10018990	  HY208269	  2015-04-02 19:20:00 UTC	018XX W 38TH ST	      2022	NARCOTICS	POSS:       COCAINE	STREET	                      true	false	912	9	11	59	18	1164836.0	1879503.0	2015	2018-02-10 15:50:01 UTC	41.824962701	-87.670771152	"(41.824962701, -87.670771152)"
+10034170	  HY223658	  2015-04-15 23:02:00 UTC	036XX S WOOD ST	      2021	NARCOTICS	POSS:       BARBITUATES	STREET	                  true	false	912	9	11	59	18	1164944.0	1880670.0	2015	2018-02-10 15:50:01 UTC	41.828162789	-87.67034189	"(41.828162789, -87.67034189)"
+10148475	  HY338103	  2015-07-12 18:46:00 UTC	132XX S GREEN BAY AVE	502P	OTHER OFFENSE	        FALSE/STOLEN/ALTERED TRP	STREET  	  true	false	433	4	10	55	26	1200751.0	1817888.0	2015	2018-02-10 15:50:01 UTC	41.655051256	-87.541092691	"(41.655051256, -87.541092691)"
+10563500	  HZ310457  	2016-06-16 11:30:00 UTC	051XX S PULASKI RD	  1121	DECEPTIVE PRACTICE	  COUNTERFEITING DOCUMENT	STREET      	false	false	815	8	23	62	10	1150570.0	1870231.0	2016	2018-02-10 15:50:01 UTC	41.799808989	-87.723350952	"(41.799808989, -87.723350952)"
+10677915	  HZ430714	  2016-09-12 11:15:00 UTC	029XX N NORDICA AVE	  4625	OTHER OFFENSE	        PAROLE VIOLATION	STREET	true      	false	2511	25	36	18	26	1128573.0	1918746.0	2016	2018-02-10 15:50:01 UTC	41.933341681	-87.802922561	"(41.933341681, -87.802922561)"
+10729156	  HZ481508  	2016-10-20 06:35:00 UTC	026XX S LA SALLE ST	  0915	MOTOR VEHICLE THEFT	  TRUCK, BUS, MOTOR HOME"	STREET	      false	false	914	9	11	34	07	1175717.0	1886764.0	2016	2018-02-10 15:50:01 UTC	41.844650273	-87.630634131	"(41.844650273, -87.630634131)"
+10888140	  JA198074	  2017-03-23 21:49:00 UTC	083XX S ANTHONY AVE	  502R	OTHER OFFENSE	        VEHICLE TITLE/REG OFFENSE	STREET	    true	false	412	4	8	45	26	1190217.0	1850287.0	2017	2018-02-10 15:50:01 UTC	41.744217017	-87.578597521	"(41.744217017, -87.578597521)"
+10918103	  JA231602  	2017-04-19 22:18:00 UTC	016XX W 35TH ST	      2022	NARCOTICS	POSS:       COCAINE	STREET	                      true	false	912	9	11	59	18	1165774.0	1881521.0	2017	2018-02-10 15:50:01 UTC	41.830480404	-87.667272495	"(41.830480404, -87.667272495)"
+11098454	  JA445348  	2017-09-24 22:40:00 UTC	044XX W 59TH ST	      502P	OTHER OFFENSE	        FALSE/STOLEN/ALTERED TRP	STREET    	true	false	813	8	13	62	26	1147871.0	1865117.0	2017	2018-02-10 15:50:01 UTC	41.785827502	-87.733379951	"(41.785827502, -87.733379951)"
 
 
-Q2. List 10 results where the taxi ride was of one hour or more.
+Q2. List 10 assault crimes where attacker was arrested. (From chicago_crime dataset)
 
-Commands:
-SELECT taxi_id, trip_seconds
-FROM `bigquery-public-data.chicago_taxi_trips.taxi_trips` 
-where trip_seconds>=3600
+Command:
+select * from `bigquery-public-data.chicago_crime.crime`
+where primary_type = "ASSAULT" AND arrest = true 
+LIMIT 10 
+
+Result:
+unique_key	case_number	date	block	iucr	primary_type	description	location_description	arrest	domestic	beat	district	ward	community_area	fbi_code	x_coordinate	y_coordinate	year	updated_on	latitude	longitude	location
+10064750	HY253325	2015-05-09 11:50:00 UTC	016XX W 37TH ST	0530	ASSAULT	AGGRAVATED: OTHER DANG WEAPON	RESIDENCE	true	false	912	9	11	59	04A	1165805.0	1880191.0	2015	2018-02-10 15:50:01 UTC	41.826830085	-87.667196593	"(41.826830085, -87.667196593)"
+10165674	HY353656	2015-07-24 10:40:00 UTC	032XX S PAULINA ST	0520	ASSAULT	AGGRAVATED:KNIFE/CUTTING INSTR	RESIDENCE	true	false	912	9	11	59	04A	1165539.0	1883428.0	2015	2018-02-10 15:50:01 UTC	41.835718405	-87.668080532	"(41.835718405, -87.668080532)"
+10661526	HZ412155	2016-08-29 15:10:00 UTC	049XX N AUSTIN AVE	0520	ASSAULT	AGGRAVATED:KNIFE/CUTTING INSTR	APARTMENT	true	true	1622	16	45	11	04A	1135191.0	1932454.0	2016	2018-02-10 15:50:01 UTC	41.970842909	-87.778275137	"(41.970842909, -87.778275137)"
+11374012	JB341441	2018-07-08 22:08:00 UTC	021XX S ARCHER AVE	0545	ASSAULT	PRO EMP HANDS NO/MIN INJURY	OTHER	true	false	914	9	25	34	08A	1174997.0	1890040.0	2018	2018-07-17 15:51:17 UTC	41.853655999	-87.633178377	"(41.853655999, -87.633178377)"
+2654428	HJ265273	2003-03-28 08:32:24 UTC	002XX W 37TH ST	0520	ASSAULT	AGGRAVATED:KNIFE/CUTTING INSTR	CHA APARTMENT	true	false	925	9	3	34	04A	1175449.0	1880436.0	2003	2018-02-28 15:56:25 UTC	41.827291742	-87.631807303	"(41.827291742, -87.631807303)"
+2744262	HJ380905	2003-05-22 20:24:00 UTC	092XX S UNIVERSITY AVE	0554	ASSAULT	AGG PO HANDS NO/MIN INJURY	RESIDENCE PORCH/HALLWAY	true	false	413	4	8	47	08A	1185491.0	1843956.0	2003	2018-02-10 15:50:01 UTC	41.726956515	-87.596112561	"(41.726956515, -87.596112561)"
+6876976	HR279549	2009-04-21 12:30:00 UTC	105XX S CORLISS AVE	0530	ASSAULT	AGGRAVATED: OTHER DANG WEAPON	OTHER	true	false	512	5	9	50	04A	1183438.0	1835407.0	2009	2018-02-28 15:56:25 UTC	41.70354502	-87.603898184	"(41.70354502, -87.603898184)"
+6963522	HR367838	2009-06-10 11:20:00 UTC	109XX S ST LOUIS AVE	0545	ASSAULT	PRO EMP HANDS NO/MIN INJURY	SIDEWALK	true	false	2211	22	19	74	08A	1154956.0	1831893.0	2009	2016-02-04 06:33:39 UTC	41.694516629	-87.708287418	"(41.694516629, -87.708287418)"
+11463639	JB458274	2018-10-01 13:50:00 UTC	065XX W BRYN MAWR AVE	0545	ASSAULT	PRO EMP HANDS NO/MIN INJURY	"SCHOOL, PUBLIC, BUILDING"	true	false	1612	16	41	10	08A	1131583.0	1936817.0	2018	2018-10-08 16:15:13 UTC	41.98287878	-87.791440835	"(41.98287878, -87.791440835)"
+11606172	JC164848	2019-02-23 15:25:00 UTC	101XX S EWING AVE	0530	ASSAULT	AGGRAVATED: OTHER DANG WEAPON	BARBERSHOP	true	false	432	4	10	52	04A	1202149.0	1838397.0	2019	2019-03-02 16:09:55 UTC	41.711294502	-87.535282344	"(41.711294502, -87.535282344)"
+
+
+Q3. List 10 incidents when a weapons violation took place at a school, public place and/or building was done and no arrest took place. (From chicago_crime dataset) 
+
+Command:
+select * from `bigquery-public-data.chicago_crime.crime`
+where location_description="SCHOOL, PUBLIC, BUILDING" AND primary_type="WEAPONS VIOLATION"
+and arrest = false
 limit 10
 
 Result:
-taxi_id	                                                                                                                          trip_seconds
-bb2b1096811ecd58e2e215aad17c5f1a7083521937c0ce15c8f6893d549b99bd2476a1bbdbf9bf736215816d27c756a2233213bbd1f976daba2ae1debd2b42e9	37061
-0ea15dafe7094cba8dd92167a79db0f7366aaf964f8edb701019783c97c303455ccf718fc829b8b5bda160235f326637b1c64bbae7d0139fdf26e97c24c476f8	7740
-0ea15dafe7094cba8dd92167a79db0f7366aaf964f8edb701019783c97c303455ccf718fc829b8b5bda160235f326637b1c64bbae7d0139fdf26e97c24c476f8	3600
-a7b189feae5a04eacd520f6a4898a70e26e4dc6ab9c5822de8e0832b8f8a55c8a8680e04e734e9bf64bd62603d5851c8e14717946fc31fac42da43613cb5a589	5220
-a7b189feae5a04eacd520f6a4898a70e26e4dc6ab9c5822de8e0832b8f8a55c8a8680e04e734e9bf64bd62603d5851c8e14717946fc31fac42da43613cb5a589	6240
-0642efa0706335c4f47ec1f5d0f84bbc4cedaeb693a0f4ccdb39c0e88bc7b266e7030d46b59e379fdac0257d144f252520e12897429ce8da7981b9752fbd6736	4620
-a7b189feae5a04eacd520f6a4898a70e26e4dc6ab9c5822de8e0832b8f8a55c8a8680e04e734e9bf64bd62603d5851c8e14717946fc31fac42da43613cb5a589	4800
-3cbdc624a4ef03ecd064f284467041ab8077b80cceffc364a99b7b7e88088bf181b41313041db85bfb1fa82c96db22c6ec42fffbe859c677b63c811b9adbfa19	3600
-41ba5cfc7d59a833c94ed0b59fcc8a5f3aa5ca1b2913253ff307eec5e206809cffd5b43e04faebd9b8a259159bf14c1b672374f79f663e8a5ffea1a21349a94d	3602
-29cfaf00459352d74acd44380b6f52f30b5f5586013fd47614bd9b20749873063360409860758910b41c4c956e6c7b3a2da99d04012ad847a7122d2327e1c3c3	3840
+unique_key	case_number	date	                    block	                      iucr	primary_type	description	location_description	arrest	domestic	beat	district	ward	community_area	fbi_code	x_coordinate	y_coordinate	year	updated_on	latitude	longitude	location
+5178470	    HM760683	  2006-12-07 08:40:00 UTC	  049XX S ARCHER AVE	141C	      WEAPONS VIOLATION	UNLAWFUL USE OTHER DANG WEAPON	"SCHOOL, PUBLIC, BUILDING"	false	false	821	8	14	57	15	1150934.0	1871470.0	2006	2018-02-28 15:56:25 UTC	41.803201891	-87.72198373	"(41.803201891, -87.72198373)"
+8810604	    HV483653	  2012-09-20 08:50:00 UTC	  092XX S PHILLIPS AVE	1460	    WEAPONS VIOLATION	POSS FIREARM/AMMO:NO FOID CARD	"SCHOOL, PUBLIC, BUILDING"	false	false	423	4	7	48	15	1194110.0	1844254.0	2012	2018-02-10 15:50:01 UTC	41.727567355	-87.564530885	"(41.727567355, -87.564530885)"
+2653232	    HJ263586	  2003-03-26 15:45:00 UTC	  009XX E 133RD PL	141C	        WEAPONS VIOLATION	UNLAWFUL USE OTHER DANG WEAPON	"SCHOOL, PUBLIC, BUILDING"	false	false	533	5	9	54	15	1184674.0	1817270.0	2003	2018-02-28 15:56:25 UTC	41.653745791	-87.599937561	"(41.653745791, -87.599937561)"
+3331827	    HK369804	  2004-05-17 12:15:00 UTC	  113XX S FORRESTVILLE AVE	2900	WEAPONS VIOLATION	UNLAWFUL USE/SALE AIR RIFLE	"SCHOOL, PUBLIC, BUILDING"	false	false	531	5	9	50	15	1181944.0	1829952.0	2004	2018-02-28 15:56:25 UTC	41.688610361	-87.609536712	"(41.688610361, -87.609536712)"
+3352321	    HK393414	  2004-05-28 11:19:45 UTC	  036XX E 114TH ST	141C	        WEAPONS VIOLATION	UNLAWFUL USE OTHER DANG WEAPON	"SCHOOL, PUBLIC, BUILDING"	false	false	433	4	10	52	15	1202039.0	1829985.0	2004	2018-02-28 15:56:25 UTC	41.688214048	-87.53597039	"(41.688214048, -87.53597039)"
+6835846	    HR242632	  2009-03-30 11:26:31 UTC	  099XX S AVENUE H	141C	        WEAPONS VIOLATION	UNLAWFUL USE OTHER DANG WEAPON	"SCHOOL, PUBLIC, BUILDING"	false	false	432	4	10	52	15	1202797.0	1839847.0	2009	2018-02-28 15:56:25 UTC	41.715256909	-87.532859912	"(41.715256909, -87.532859912)"
+7470813	    HS271763	  2010-04-23 09:30:00 UTC	  055XX N CHRISTIANA AVE	141C	  WEAPONS VIOLATION	UNLAWFUL USE OTHER DANG WEAPON	"SCHOOL, PUBLIC, BUILDING"	false	false	1712	17	40	13	15	1153055.0	1936554.0	2010	2018-02-10 15:50:01 UTC	41.981757163	-87.712477774	"(41.981757163, -87.712477774)"
+8513325	    HV190042	  2012-03-09 14:00:00 UTC	  007XX E 103RD ST	141C	        WEAPONS VIOLATION	UNLAWFUL USE OTHER DANG WEAPON	"SCHOOL, PUBLIC, BUILDING"	false	false	511	5	8	50	15	1183035.0	1836831.0	2012	2018-02-10 15:50:01 UTC	41.707462015	-87.605329791	"(41.707462015, -87.605329791)"
+7156987	    HR565503	  2009-10-01 11:00:00 UTC	  092XX S JEFFERY AVE	2900	      WEAPONS VIOLATION	UNLAWFUL USE/SALE AIR RIFLE	"SCHOOL, PUBLIC, BUILDING"	false	false	413	4	8	48	15	1191125.0	1844068.0	2009	2018-02-10 15:50:01 UTC	41.727129592	-87.575471223	"(41.727129592, -87.575471223)"
+11288099	  JB227499	  2018-04-17 15:00:00 UTC	  039XX W PETERSON AVE	141C	    WEAPONS VIOLATION	UNLAWFUL USE OTHER DANG WEAPON	"SCHOOL, PUBLIC, BUILDING"	false	false	1711	17	39	13	15	1149131.0	1939588.0	2018	2018-05-04 15:51:04 UTC	41.990159786	-87.726830225	"(41.990159786, -87.726830225)"
 
 
-Q3. List 10 taxi rides where the payment was made through cash; along with the taxi ids.
+Q4. How many arrests have been made in the residential area? (From chicago_crime dataset)
+A. 167106 arrests have taken place in the residential area.
 
 Command:
-SELECT taxi_id, payment_type
-FROM `bigquery-public-data.chicago_taxi_trips.taxi_trips` 
-where payment_type="Cash"
+select count (*) as total_row,
+count (DISTINCT location_description) as RESIDENCE
+from `bigquery-public-data.chicago_crime.crime` 
+where location_description = "RESIDENCE" and arrest = true
+
+Result:
+total_row	RESIDENCE
+167106	1
+
+Q5. How many child abductors have been arrested? (From chicago_crime dataset)
+A.  228 child abductor arrests have been filed. 
+
+Command:
+SELECT count (description)
+FROM `bigquery-public-data.chicago_crime.crime` 
+where description = "CHILD ABDUCTION" and arrest = true
+
+Result:
+f0_
+228
+
+
+Q6.List 10 offenses that took place on a CTA Bus. (From chicago_crime dataset)
+
+Commnad:
+select type1.location_description, type2.primary_type
+from `bigquery-public-data.chicago_crime.crime` as type1
+join `bigquery-public-data.chicago_crime.crime` as type2
+on (type1.location_description = type2.location_description) 
+limit 10 
+
+Result:
+location_description	primary_type
+CTA BUS	              PUBLIC PEACE VIOLATION
+CTA BUS	              CRIMINAL DAMAGE
+CTA BUS	              ASSAULT
+CTA BUS	              CRIMINAL DAMAGE
+CTA BUS	              SEX OFFENSE
+CTA BUS	              ASSAULT
+CTA BUS	              ASSAULT
+CTA BUS	              ASSAULT
+CTA BUS	              SEX OFFENSE
+CTA BUS	              DECEPTIVE PRACTICE
+
+
+Q7. How many total complaints were registered in Chicago?
+A. 7058504 cases
+
+Command: 
+SELECT count (unique_key)
+FROM `bigquery-public-data.chicago_crime.crime`
+
+Result:
+Row	 f0_	
+1	   7058504
+
+
+Q8. List out 10 females whose name begin with M and belong to Florida, US. (From usa_names dataset)
+
+Command:
+SELECT * FROM `bigquery-public-data.usa_names.usa_1910_2013` 
+where name like 'M%' and state = "FL"
 limit 10
 
-Results:
-taxi_id	                                                                                                                          payment_type
-c1e1cb6dfa6fb19de3558175cd6dca3aed664f04c63fca6be35956072858d88c8977a2f088995e6d94618f4122d103530046a18ae6525b6ac6072dc76aab31ee	Cash
-7dfc05cef9090a017bc1e58dac32977a43a707c960fd1e0099d48e432face1df82c486bc8caca06a01a7e5774da6c0a94b966e9a86cd84b9ad0b1b55655a7006	Cash
-81d652b4d1a83430b2ecbdd8f126b135f9f37b6115b7a51aabeb72edfa7fda22ace947a09e70ddd35edb5cb1bd1d7a8f25041e696029dc33f701f98e85de0e23	Cash
-390210c789e65184cf389dd3484688acf1956ab0c6618362f43f2f60da01b8b3a2afb54349a98fa29c22d66ef23d7dd607493da0c78794b18893cc57b8af4799	Cash
-381b18e55254dd5635fefcf1b2a7956671bd47be71a38e943c2510dd514d0bbebdd76a9003bef6ae1e7f150cf611bb0793951bb9b3fa0d23215b0d5e87389845	Cash
-aa798918401638e9ac120290066e3f74cc7b21e8bc6af7626ad1ba3a76323c7f6d21c4374ae690d959bd2024451e4287c08de0fccee0aff28b74668e8b776660	Cash
-771de8ffd7efdaaf7f421d9fe90a13ffc6f7c5f2e2e0b3f51ec1d43b02f532ea241815c767fec66802ec9ef3dbc1124f7a3a786ea7a40796416f716c448705f4	Cash
-2e8af02055a795ddeca16cb6848caa5adfcbf1d4bf6a86a86134dccb9b38cea7d5d09281baaf60d8675ef5177648294b31bee054305c953633ff16b1e8678a7c	Cash
-771de8ffd7efdaaf7f421d9fe90a13ffc6f7c5f2e2e0b3f51ec1d43b02f532ea241815c767fec66802ec9ef3dbc1124f7a3a786ea7a40796416f716c448705f4	Cash
-8f1c033d917d34e6a8f5a377eaf2f3258e1a6b411da6ca4423668d6ffa1afc1b031949ce2e8c2529ed398e82339eed94cc06c8aa1408907313888586ed6342de	Cash
+Result:
+state	gender	year	name	    number
+FL	  F	      1910	Mary	    239
+FL	  F	      1910	Marie	    54
+FL	  F	      1910	Martha	  35
+FL	  F	      1911	Maria	    10
+FL	  F	      1911	Mercedes	6
+FL	  F	      1911	Minnie	  37
+FL	  F	      1911	Marion	  12
+FL	  F	      1911	Marjorie	8
+FL	  F	      1911	Myrtice	  7
+FL	  F	      1912	Mamie	    31
 
 
-Q4.
+Q9. How many of the works of American artists are highlighted in the public domain under the department of The Libraries at the Metropolitan Museum of Art? (from the_met dataset)
+
+Command:
+SELECT count (object_number)
+FROM `bigquery-public-data.the_met.objects` 
+where artist_nationality = "American" and is_highlight = true and is_public_domain = true and department = "The Libraries"
+
+Result:
+f0_
+7
+
+
+Q10. What is the average trip duration for New York citibikers? (from new_york dataset)
+
+Command:
+SELECT AVG (tripduration)
+FROM `bigquery-public-data.new_york.citibike_trips` 
+
+Result:
+f0_
+933.7485653764315
+
